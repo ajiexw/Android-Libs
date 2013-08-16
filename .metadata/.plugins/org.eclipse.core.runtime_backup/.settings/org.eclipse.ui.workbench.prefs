@@ -1,0 +1,14 @@
+ColorsAndFontsPreferencePage.expandedCategories=Torg.eclipse.ui.workbenchMisc\tTorg.eclipse.jdt.ui.presentation
+ColorsAndFontsPreferencePage.selectedElement=Forg.eclipse.jface.textfont
+PLUGINS_NOT_ACTIVATED_ON_STARTUP=
+eclipse.preferences.version=1
+org.eclipse.jdt.ui.PropertiesFileEditor.textfont=1|Monaco|13.0|0|COCOA|1|Monaco;
+org.eclipse.jdt.ui.editors.textfont=1|Monaco|13.0|0|COCOA|1|Monaco;
+org.eclipse.jdt.ui.javadocfont=1|Lucida Grande|13.0|0|COCOA|1|LucidaGrande;
+org.eclipse.jface.bannerfont=1|Lucida Grande|14.0|1|COCOA|1|LucidaGrande-Bold;
+org.eclipse.jface.dialogfont=1|Lucida Grande|13.0|0|COCOA|1|LucidaGrande;
+org.eclipse.jface.headerfont=1|Lucida Grande|14.0|1|COCOA|1|LucidaGrande-Bold;
+org.eclipse.jface.textfont=1|Inconsolata|13.0|0|COCOA|1|Inconsolata;
+org.eclipse.ui.commands=<?xml version\="1.0" encoding\="UTF-8"?>\n<org.eclipse.ui.commands>\n<keyBinding contextId\="org.eclipse.ui.contexts.window" keyConfigurationId\="org.eclipse.ui.defaultAcceleratorConfiguration" keySequence\="ALT+COMMAND+X J"/>\n<keyBinding commandId\="org.eclipse.jdt.debug.ui.localJavaShortcut.run" contextId\="org.eclipse.ui.contexts.window" keyConfigurationId\="org.eclipse.ui.defaultAcceleratorConfiguration" keySequence\="COMMAND+Q"/>\n</org.eclipse.ui.commands>
+org.eclipse.ui.workbench.texteditor.blockSelectionModeFont=1|Monaco|13.0|0|COCOA|1|Monaco;
+overridepresentation=true

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring clone="true" comment="Infer generic type arguments on &apos;S01_E17_ProgressBar&apos;&#x0A;- Original project: &apos;S01_E17_ProgressBar&apos;&#x0A;- Original elements:&#x0A;     S01_E17_ProgressBar&#x0A;- Assume clone() returns an instance of the receiver type&#x0A;- Leave unconstrained type arguments raw" description="Infer generic type arguments" element1="=S01_E17_ProgressBar" flags="6" id="org.eclipse.jdt.ui.infer.typearguments" leave="true" stamp="1368589578955" version="1.0"/>
+</session>

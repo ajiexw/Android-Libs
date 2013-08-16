@@ -1,0 +1,11 @@
+1368179478974	Rename type 'Student'
+1368179541917	Rename type 'Students'
+1368179621558	Move compilation unit
+1368179807291	Pull up members to 'Student'
+1368179937990	Extract superclass 'Chinese'
+1368179982610	Delete element
+1368180073019	Extract superclass 'China'
+1368180157851	Delete element
+1368180386266	Extract method 'test'
+1368180450417	Extract method 'test'
+1368180577036	Extract method 'test'

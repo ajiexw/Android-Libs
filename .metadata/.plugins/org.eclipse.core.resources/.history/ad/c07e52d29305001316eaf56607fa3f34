@@ -1,0 +1,43 @@
+package com.ajiex.httpclient;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+
+public class MainActivity extends Activity {
+	
+	String url = "http://aoaola.com/aoaolaapi/getbrandlist";
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+	
+	public String doGet(){
+		try{
+			HttpGet httpGet = new HttpGet(url);
+			HttpClient hc = new DefaultHttpClient();
+			HttpResponse ht = hc.execute(httpGet);
+		}catch (ClientProtocolException e) {  
+	        // TODO Auto-generated catch block  
+	        e.printStackTrace();  
+	        return "exception";  
+	    } 
+		
+		return "Error";
+	}
+}
