@@ -28,7 +28,6 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		textView = (TextView)findViewById(R.id.textView);
-		new Thread(runnable).start();
 	}	
 	
 	@SuppressLint("HandlerLeak")

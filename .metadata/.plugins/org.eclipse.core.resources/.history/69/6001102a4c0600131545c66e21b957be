@@ -11,7 +11,6 @@ import org.apache.http.util.EntityUtils;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.widget.Button;
@@ -28,43 +27,35 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		textView = (TextView)findViewById(R.id.textView);
-		new Thread(runnable).start();
 	}	
 	
-	@SuppressLint("HandlerLeak")
 	Handler handler = new Handler(){
 		public void handleMessage(android.os.Message msg) {
 			super.handleMessage(msg);
 			Bundle data = msg.getData();
 			String val = data.getString("value");
 			textView.setText(val);
-		}
-	};
+		};
+	}
 	
 	Runnable runnable = new Runnable() {
 		public void run() {
 			HttpGet httpGet = new HttpGet(urlAdress);
 			HttpClient hc = new DefaultHttpClient();
-			String result;
 			try{
 				HttpResponse ht = hc.execute(httpGet);
 				if(ht.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
-					result = EntityUtils.toString(ht.getEntity());
+					String result = EntityUtils.toString(ht.getEntity());
+					textView.setText(result);
 				}else{
-					result = "error";  
+					textView.setText("error");  
 				}
 			}catch(ClientProtocolException e) {  
-				result = "error";  
+		        textView.setText(e.getMessage().toString());  
 		    }catch(IOException e) {  
-		    	result = "error";  
+		    	textView.setText(e.getMessage().toString());   
 		    }
 			
-			Message msg = new Message();
-			Bundle data = new Bundle();
-			
-			data.putString("value", result);
-			msg.setData(data);
-			handler.sendMessage(msg);
 			
 		}
 	};

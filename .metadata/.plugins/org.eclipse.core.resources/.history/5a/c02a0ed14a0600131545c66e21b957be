@@ -10,8 +10,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.widget.Button;
@@ -24,50 +22,27 @@ public class MainActivity extends Activity {
 	TextView textView;
 	Button button;
 
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
 		textView = (TextView)findViewById(R.id.textView);
-		new Thread(runnable).start();
-	}	
-	
-	@SuppressLint("HandlerLeak")
-	Handler handler = new Handler(){
-		public void handleMessage(android.os.Message msg) {
-			super.handleMessage(msg);
-			Bundle data = msg.getData();
-			String val = data.getString("value");
-			textView.setText(val);
-		}
-	};
-	
-	Runnable runnable = new Runnable() {
-		public void run() {
+		
+		try{
 			HttpGet httpGet = new HttpGet(urlAdress);
 			HttpClient hc = new DefaultHttpClient();
-			String result;
-			try{
-				HttpResponse ht = hc.execute(httpGet);
-				if(ht.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
-					result = EntityUtils.toString(ht.getEntity());
-				}else{
-					result = "error";  
-				}
-			}catch(ClientProtocolException e) {  
-				result = "error";  
-		    }catch(IOException e) {  
-		    	result = "error";  
-		    }
-			
-			Message msg = new Message();
-			Bundle data = new Bundle();
-			
-			data.putString("value", result);
-			msg.setData(data);
-			handler.sendMessage(msg);
-			
-		}
-	};
-	
-	
+			HttpResponse ht = hc.execute(httpGet);
+			if(ht.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
+				String result = EntityUtils.toString(ht.getEntity());
+				textView.setText(result);
+			}else{
+				textView.setText("error");  
+			}
+		} catch (ClientProtocolException e) {  
+	        textView.setText(e.getMessage().toString());  
+	    } catch (IOException e) {  
+	    	textView.setText(e.getMessage().toString());   
+	    }
+	}	
 }
