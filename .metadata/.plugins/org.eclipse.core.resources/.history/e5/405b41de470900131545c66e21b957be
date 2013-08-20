@@ -1,0 +1,64 @@
+package com.ajiex.splash;
+
+import java.io.IOException;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.widget.TextView;
+
+public class MainActivity extends Activity {
+
+	private TextView textView;
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		textView = (TextView)findViewById(R.id.textView);
+		
+		new Thread(runnable).start();
+		
+	}
+	
+	Handler handler = new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			
+			textView.setText("tt");
+		};
+	};
+	
+	Runnable runnable = new Runnable() {
+		public void run() {
+			
+			String urlAddress = "http://exp.aoaola.com/aoaolaapi/getbrandlist";
+			String result;
+			HttpClient hClient =new DefaultHttpClient();
+			HttpGet hGet = new HttpGet(urlAddress);
+			try{
+				HttpResponse hResponse = hClient.execute(hGet);
+				if(hResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
+					result = EntityUtils.toString(hResponse.getEntity());
+				}
+			}catch(ClientProtocolException e){
+				result = "error";
+			}catch(IOException e){
+				result = "error";
+			}
+			
+			Message msg = new Message();
+			Bundle data = new Bundle();
+			data.putString("value", result);
+			msg.setData(data);
+			handler.sendMessage(msg);
+		}
+	};
+	
+}

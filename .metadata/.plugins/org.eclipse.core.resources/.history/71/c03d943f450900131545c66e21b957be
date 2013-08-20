@@ -1,0 +1,48 @@
+package com.ajiex.splash;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.os.Handler;
+import android.widget.TextView;
+
+public class MainActivity extends Activity {
+
+	private TextView textView;
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		textView = (TextView)findViewById(R.id.textView);
+		
+		new Thread(runnable).start();
+		
+	}
+	
+	Handler handler = new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			
+			String urlAddress = "http://exp.aoaola.com/aoaolaapi/getbrandlist";
+			String result;
+			HttpClient hClient =new DefaultHttpClient();
+			HttpGet hGet = HttpGet(urlAddress);
+			try{
+				HttpResponse hResponse = hClient.execute(hGet);
+				if(hResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
+					result = EntityUtils.toString(hResponse.getEntity());
+				}
+			}catch(ClientProtocolException){
+				result = "error";
+			}catch(IOException){
+				result = "error";
+			}
+			
+			textView.setText("tt");
+		};
+	};
+	
+	Runnable runnable = new Runnable() {
+		public void run() {
+			handler.obtainMessage().sendToTarget();
+		}
+	};
+	
+}

@@ -1,0 +1,59 @@
+package com.ajiex.splash;
+
+import java.io.IOException;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+
+import android.os.Bundle;
+import android.os.Handler;
+import android.app.Activity;
+import android.content.Intent;
+
+public class SplashActivity extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_splash);
+		Handler x = new Handler();
+		x.postDelayed(new SplashRunnable(), 1500);
+	}
+	
+	class SplashRunnable implements Runnable{
+		public void run() {
+			startActivity(new Intent(SplashActivity.this, MainActivity.class));
+			SplashActivity.this.finish();
+			
+			//更改布局
+			//SplashActivity.this.setContentView(R.layout.activity_main);
+			
+			String urlAdress = "http://exp.aoaola.com/aoaolaapi/getbrandlist";
+			String result;
+			HttpGet httpGet = new HttpGet(urlAdress);
+			HttpClient hc = new DefaultHttpClient();
+			
+			try{
+				HttpResponse ht = hc.execute(httpGet);
+				if(ht.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
+					result = EntityUtils.toString(ht.getEntity());
+				}else{
+					result = "error";  
+				}
+			}catch(ClientProtocolException e) {  
+				result = "error";  
+		    }catch(IOException e) {  
+		    	result = "error";  
+		    }
+			
+		}
+	}
+
+	
+
+}

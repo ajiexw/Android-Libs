@@ -1,0 +1,32 @@
+package com.ajiex.splash;
+
+import android.os.Bundle;
+import android.os.Handler;
+import android.widget.TextView;
+import android.app.Activity;
+
+public class MainActivity extends Activity {
+
+	private TextView textView;
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		textView = (TextView)findViewById(R.id.textView);
+		
+		new Thread(runnable).start();
+		
+	}
+	
+	Handler handler = new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			TextView.setText("tt");
+		};
+	}
+	
+	Runnable runnable = new Runnable() {
+		public void run() {
+			handler.obtainMessage().sendToTarget();
+		}
+	};
+	
+}
