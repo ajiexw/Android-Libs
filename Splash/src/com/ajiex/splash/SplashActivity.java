@@ -12,7 +12,7 @@ public class SplashActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_splash);
 		Handler x = new Handler();
-		x.postDelayed(new SplashRunnable(), 1200);
+		x.postDelayed(new SplashRunnable(), 1000);
 	}
 	
 	class SplashRunnable implements Runnable{
